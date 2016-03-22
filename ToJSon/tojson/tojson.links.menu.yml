@@ -1,0 +1,6 @@
+tojson.link:
+  title: 'To Json'
+  description: 'Create a content type to Json array format'
+  route_name: tojson.router
+  parent: system.admin_config_development
+  weight: 100

@@ -1,0 +1,7 @@
+tojson.router:
+  path: '/tojson'
+  defaults:
+    _form: '\Drupal\tojson\Controller\TojsonController'
+    _title: 'To Json'
+  requirements:
+    _permission: 'access content'

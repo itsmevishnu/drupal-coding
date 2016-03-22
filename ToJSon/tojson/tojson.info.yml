@@ -1,0 +1,5 @@
+name: 'To Josn Module'
+description: 'A module used to create a Json from the content type'
+type: module
+package: File management
+core: 8.x
