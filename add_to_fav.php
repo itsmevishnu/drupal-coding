@@ -70,8 +70,8 @@ function my_add_fav_submit($form, &$form_state) {
       ->fields(array(
         'user_id' => $user->uid,
         'fav_status' => 1,
-        'created_at' => date('Y-m-d H:i:s', my_get_UTC_time()),
-        'modified_at' => date('Y-m-d H:i:s', my_get_UTC_time())
+        'created_at' => date('Y-m-d H:i:s', time()),
+        'modified_at' => date('Y-m-d H:i:s', time())
       ))
       ->execute();
 
@@ -102,7 +102,7 @@ function my_remove_fav_submit($form, &$form_state) {
 
   $my_id = $form_state['my']['my_id'];
   db_update('my_fav_table')
-      ->fields(array('fav_status' => 0, 'modified_at' => date('Y-m-d H:i:s', my_get_UTC_time())))
+      ->fields(array('fav_status' => 0, 'modified_at' => date('Y-m-d H:i:s', time())))
       ->condition('user_id', $user->uid, '=')
       ->condition('fav_status', 1, '=')
       ->execute();
