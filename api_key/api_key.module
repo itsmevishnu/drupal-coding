@@ -1,0 +1,63 @@
+<?php
+/**
+ * @file
+ * Contains all the modification of drupal core using hooks.
+ */
+use Drupal\Core\Form\FormStateInterface;
+
+function api_key_form_system_site_information_settings_alter(&$form, 
+	FormStateInterface $form_state, $form_id) {
+	if($form_id != 'system_site_information_settings') {
+		return;
+	}
+	$site_api = \Drupal::config('api_key.settings')->get('siteapikey');
+
+	$form['api_settings'] = array(
+		'#type' => 'details',
+		'#title' => t('Site API settings'),
+		'#open' => true
+	);
+
+	$form['api_settings']['siteapikey'] = [
+		'#type' => 'textfield',
+		'#title' => t('API Key'),
+		'#default_value' => $site_api,
+		'#description' => t('Enter the API key for making the site 
+			protected on API calls'),
+		'#maxlength' => 32,
+		'#required' => true,
+		'#placeholder'=> t('No API key yet')
+	];
+	
+	$value = !empty($site_api)? t('Update Configuration'): t('Save Configuration');
+	$form['api_settings']['actions']['#type'] = 'actions';
+	$form['api_settings']['actions']['#type'] = 'actions';
+	$form['actions']['submit'] = [
+		'#type' => 'submit',
+		'#value' => $value,
+		'#button_type' => 'primary',
+	];
+}
+
+// function api_key_form_submit(array $form, FormStateInterface $from_state) {
+// 	$site_api = \Drupal::config('api_key.settings')->get('siteapikey');
+// 	//Reads the new value form the form instance.
+// 	$new_value = $from_state->getValue('siteapikey');
+// 	//Changes the success message based on the condtions.
+// 	if(!empty($site_api)) {
+// 			//Sets update message.
+// 		$message = t('Site API key is changed from @old_value to 
+// 			@new_value', [
+// 				'@old_value'=> $site_api, 
+// 				'@new_value'=> $new_value
+// 			]);
+// 	} else {
+// 			//Sets success message.
+// 		$message = t('@new_value is set as site API key.',
+// 			['@new_value'=>$new_value]);
+// 	}
+
+// 	//Prints the message.
+// 	drupal_set_message($message,$type='status', $repeat=true);
+
+// }

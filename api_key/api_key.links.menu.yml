@@ -1,0 +1,6 @@
+api_key.admin:
+  title: 'Configure API key'
+  description: 'Configure API key for the website so that user can validate the website through the API key'
+  parent: system.admin_config_system
+  route_name: api_key.configuration
+  weight: 100

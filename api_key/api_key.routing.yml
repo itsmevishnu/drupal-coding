@@ -1,0 +1,15 @@
+api_key.configuration:
+  path: '/api/configuration'
+  defaults:
+    _form: 'Drupal\api_key\Form\ApiKeyForm'
+    _title: "Configure API Key"
+  requirements:
+    _permission: 'administer site configuration'
+
+#for the api generation url.
+api_key.page_json:
+  path: '/page_json/{api}/{id}'
+  defaults:
+    _controller: '\Drupal\api_key\Controller\ApiKeyController::generateJson'
+  requirements:
+    _permission: 'access content'

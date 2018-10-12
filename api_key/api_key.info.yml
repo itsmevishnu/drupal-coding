@@ -1,0 +1,9 @@
+name: "API For Pages"
+description: "This is a simple module used to generate JSON response of the 
+pages.This is created for keeping a api key for the entire drupal 8 website.You
+can access the API through example.com/{api}/{page_id}"
+type: module
+core: 8.x
+package: Custom
+version: 1.0
+
