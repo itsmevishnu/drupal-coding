@@ -22,24 +22,35 @@ class ApiKeyController extends ControllerBase {
 		//Reads the site api key
 		$site_api = \Drupal::config('api_key.settings')->get('siteapikey');
 
-		//Checks the given api with site api.
-		if($api === $site_api) {
-			//Checks the given  id is a valid page id or not.
-			$query = \Drupal::entityQuery('node');
-			$page = $query->condition('type', 'page')
-				->condition('nid', $id)
-				->execute();
-			//Sets message for no page found.
-			if( empty($page)) {
-				$data = ['message'=>$this->t('There is no page found')];
-			} else {
-				$data = Node::load($id)->toArray();
-			}
-
-		} else {
+		if($api !== $site_api ){
 			//Sets error message for invalid token.
-			$data = ['message'=>$this->t('Invalid toknen,access Denied')];
+			$data = ['message'=>$this->t('Invalid token,access Denied')];
+			$this->showJsonOutput($data);
 		}
+		
+		//Checks the given  id is a valid page id or not.
+		$query = \Drupal::entityQuery('node');
+		$page = $query->condition('type', 'page')
+			->condition('nid', $id)
+			->execute();
+		//Sets message for no page found.
+		
+		if( empty($page)) {
+			$data = ['message'=>$this->t('There is no page found')];
+		} else {
+			$data = ['data' => Node::load($id)->toArray()];
+		}
+
+		$this->showJsonOutput($data);
+		
+	}
+
+	/**
+	 * Show the json output to the browser/API testing tool.
+	 * @param  [type] $data [description]
+	 * @return [type]       [description]
+	 */
+	public function showJsonOutput($data){
 		header('Content-Type: application/json');
 		die(json_encode($data, JSON_PRETTY_PRINT));
 	}
