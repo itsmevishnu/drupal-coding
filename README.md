@@ -1,6 +1,5 @@
 # drupal-coding
-This is a repository where you can find some simple code that I done
+Some useful code snippets that useful for customization of drupal 7 and 8 themes and modules.
 It include drupal 7 and 8 module, and theme development.
-May be someone have benefited by my code
-Thanks in advance for visitiong
-I welcome the comments about the code that inspire me:)
+* **To JSON**: It converts the given content types to JSON format. Ideal for API based development
+*  **API KEY** : It helps to add an API key for every request. This is useful for API authentication.
